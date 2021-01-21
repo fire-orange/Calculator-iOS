@@ -9,13 +9,13 @@ import Foundation
 
 class Calculator {
     
-    var infixExpression: [String] = []
+    static var infixExpression: [String] = []
     
-    var numberBuffer: String = ""
+    static var numberBuffer: String = ""
     
-    var result: Double?
+    static var result: Double?
     
-    func performAction(for tag: Int, with type: ButtonType) {
+    static func performAction(for tag: Int, with type: ButtonType) {
         print(tag)
         switch type {
         case .number:
@@ -50,6 +50,10 @@ class Calculator {
                 }
             }
             
+        case .allClear:
+            infixExpression = []
+            numberBuffer = ""
+            
         case .calculate:
             if numberBuffer != "" {
                 infixExpression.append(numberBuffer)
@@ -60,13 +64,13 @@ class Calculator {
         }
     }
     
-    private func calculate(infix: [String]) {
+    static private func calculate(infix: [String]) {
         let postfix = postfixExpression(of: infix)
         result = evaluate(postfix)
         print(result!)
     }
     
-    private func evaluate(_ postfix: [String]) -> Double {
+    static private func evaluate(_ postfix: [String]) -> Double {
         var operands = Stack<Double>()
         for i in postfix {
             if level(of: i) == 0 {
@@ -98,7 +102,7 @@ class Calculator {
         return operands.top()
     }
     
-    private func postfixExpression(of infix: [String]) -> [String] {
+    static private func postfixExpression(of infix: [String]) -> [String] {
         var operators = Stack<String>()
         var postfix: [String] = []
         
@@ -128,7 +132,7 @@ class Calculator {
         return postfix
     }
     
-    private func level(of symbol: String) -> Int {
+    static private func level(of symbol: String) -> Int {
         switch symbol {
         case "+":
             return 2
@@ -147,7 +151,7 @@ class Calculator {
         }
     }
     
-    func getSymbol(for tag: Int) -> String {
+    static func getSymbol(for tag: Int) -> String {
         switch tag {
         case 11:
             return "+"

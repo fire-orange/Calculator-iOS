@@ -8,5 +8,5 @@
 import Foundation
 
 enum ButtonType {
-    case number, decimalPoint, symbol, bracket, delete, calculate
+    case number, decimalPoint, symbol, bracket, delete, calculate, allClear
 }

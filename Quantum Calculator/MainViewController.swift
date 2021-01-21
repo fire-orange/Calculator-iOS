@@ -33,7 +33,6 @@ class MainViewController: UIViewController {
     @IBOutlet weak var bracketCloseButton: UIButton!
     @IBOutlet weak var allClearButton: UIButton!
     
-    var calculator = Calculator()
     var isDisplayingResults = false
     
     override func viewDidLoad() {
@@ -47,24 +46,24 @@ class MainViewController: UIViewController {
     @IBAction func buttonPressed(_ sender: UIButton) {
         switch sender.tag {
         case 10:
-            calculator.performAction(for: sender.tag, with: .decimalPoint)
+            Calculator.performAction(for: sender.tag, with: .decimalPoint)
             displayLabel.text! += "."
         case 11:
-            calculator.performAction(for: sender.tag, with: .symbol)
+            Calculator.performAction(for: sender.tag, with: .symbol)
             displayLabel.text! += "+"
         case 12:
-            calculator.performAction(for: sender.tag, with: .symbol)
+            Calculator.performAction(for: sender.tag, with: .symbol)
             displayLabel.text! += "−"
         case 13:
-            calculator.performAction(for: sender.tag, with: .symbol)
+            Calculator.performAction(for: sender.tag, with: .symbol)
             displayLabel.text! += "×"
         case 14:
-            calculator.performAction(for: sender.tag, with: .symbol)
+            Calculator.performAction(for: sender.tag, with: .symbol)
             displayLabel.text! += "÷"
         case 15:
-            calculator.performAction(for: sender.tag, with: .bracket)
+            Calculator.performAction(for: sender.tag, with: .bracket)
             if isDisplayingResults {
-                displayLabel.text! = calculator.getSymbol(for: sender.tag)
+                displayLabel.text! = Calculator.getSymbol(for: sender.tag)
                 isDisplayingResults = false
                 break
             }
@@ -73,24 +72,23 @@ class MainViewController: UIViewController {
             }
             displayLabel.text! += "("
         case 16:
-            calculator.performAction(for: sender.tag, with: .bracket)
+            Calculator.performAction(for: sender.tag, with: .bracket)
             displayLabel.text! += ")"
         case 17:
-            calculator.performAction(for: sender.tag, with: .calculate)
-            displayLabel.text = String(calculator.result!)
+            Calculator.performAction(for: sender.tag, with: .calculate)
+            displayLabel.text = String(Calculator.result!)
             isDisplayingResults = true
         case 18:
-            calculator.performAction(for: sender.tag, with: .delete)
+            Calculator.performAction(for: sender.tag, with: .delete)
             displayLabel.text!.removeLast()
             if displayLabel.text == "" || isDisplayingResults {
                 displayLabel.text = "0"
             }
         case 19:
+            Calculator.performAction(for: sender.tag, with: .allClear)
             displayLabel.text = "0"
-            calculator.infixExpression = []
-            calculator.numberBuffer = ""
         default:
-            calculator.performAction(for: sender.tag, with: .number)
+            Calculator.performAction(for: sender.tag, with: .number)
             if isDisplayingResults {
                 displayLabel.text! = "\(sender.tag)"
                 isDisplayingResults = false
