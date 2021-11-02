@@ -11,6 +11,7 @@
 		3C3553082599DAD900718BB2 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C3553072599DAD900718BB2 /* MainViewController.swift */; };
 		3C7D0234259B2CC9009C0C3C /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7D0233259B2CC9009C0C3C /* Calculator.swift */; };
 		3C7D0237259B2D41009C0C3C /* ButtonType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C7D0236259B2D41009C0C3C /* ButtonType.swift */; };
+		3CCD42EE25D2677A00301DF6 /* ButtonConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCD42ED25D2677A00301DF6 /* ButtonConfiguration.swift */; };
 		3CEC8EE3259744CC00601164 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEC8EE2259744CC00601164 /* AppDelegate.swift */; };
 		3CEC8EE5259744CC00601164 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CEC8EE4259744CC00601164 /* SceneDelegate.swift */; };
 		3CEC8EEA259744CC00601164 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CEC8EE8259744CC00601164 /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		3C3553072599DAD900718BB2 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		3C7D0233259B2CC9009C0C3C /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		3C7D0236259B2D41009C0C3C /* ButtonType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonType.swift; sourceTree = "<group>"; };
+		3CCD42ED25D2677A00301DF6 /* ButtonConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonConfiguration.swift; sourceTree = "<group>"; };
 		3CEC8EDF259744CC00601164 /* Quantum Calculator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Quantum Calculator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CEC8EE2259744CC00601164 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CEC8EE4259744CC00601164 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,6 +70,7 @@
 				3C3553072599DAD900718BB2 /* MainViewController.swift */,
 				3C7D0233259B2CC9009C0C3C /* Calculator.swift */,
 				3C18801025A5D17F0043F6C6 /* Stack.swift */,
+				3CCD42ED25D2677A00301DF6 /* ButtonConfiguration.swift */,
 				3C7D0236259B2D41009C0C3C /* ButtonType.swift */,
 				3CEC8EEB259744D200601164 /* Assets.xcassets */,
 				3CEC8EED259744D200601164 /* LaunchScreen.storyboard */,
@@ -150,6 +153,7 @@
 				3C3553082599DAD900718BB2 /* MainViewController.swift in Sources */,
 				3C7D0234259B2CC9009C0C3C /* Calculator.swift in Sources */,
 				3CEC8EE3259744CC00601164 /* AppDelegate.swift in Sources */,
+				3CCD42EE25D2677A00301DF6 /* ButtonConfiguration.swift in Sources */,
 				3C18801125A5D17F0043F6C6 /* Stack.swift in Sources */,
 				3CEC8EE5259744CC00601164 /* SceneDelegate.swift in Sources */,
 			);

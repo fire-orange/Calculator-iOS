@@ -15,11 +15,10 @@ class Calculator {
     
     static var result: Double?
     
-    static func performAction(for tag: Int, with type: ButtonType) {
-        print(tag)
-        switch type {
+    static func performAction(for button: ButtonConfiguration) {
+        switch button.type {
         case .number:
-            numberBuffer += String(tag)
+            numberBuffer += String(button.tag)
             
         case .decimalPoint:
                 numberBuffer += "."
@@ -29,7 +28,7 @@ class Calculator {
                 infixExpression.append(numberBuffer)
                 numberBuffer = ""
             }
-            infixExpression.append(getSymbol(for: tag))
+            infixExpression.append(getSymbol(for: button.tag))
             
             
         case .bracket:
@@ -37,7 +36,7 @@ class Calculator {
                 infixExpression.append(numberBuffer)
                 numberBuffer = ""
             }
-            infixExpression.append(getSymbol(for: tag))
+            infixExpression.append(getSymbol(for: button.tag))
             
         case .delete:
             if numberBuffer != "" {
@@ -59,21 +58,26 @@ class Calculator {
                 infixExpression.append(numberBuffer)
                 numberBuffer = ""
             }
-            calculate(infix: infixExpression)
+            calculate(infixExpression)
             infixExpression = []
         }
     }
     
-    static private func calculate(infix: [String]) {
-        let postfix = postfixExpression(of: infix)
+    static private func calculate(_ infix: [String]) {
+        let postfix = getPostfixExpression(for: infix)
         result = evaluate(postfix)
+        let decimalPlace: Double = 100000000
+        result = Double((round(decimalPlace * result!))/decimalPlace)
+        if result == 0 {
+            result = 0
+        }
         print(result!)
     }
     
     static private func evaluate(_ postfix: [String]) -> Double {
         var operands = Stack<Double>()
         for i in postfix {
-            if level(of: i) == 0 {
+            if getOutPrecedence(for: i) == -1 {
                 operands.push(element: Double(i)!)
             }else{
                 switch i {
@@ -81,15 +85,15 @@ class Calculator {
                     let b = operands.pop()
                     let a = operands.pop()
                     operands.push(element: a + b)
-                case "-":
+                case "−":
                     let b = operands.pop()
                     let a = operands.pop()
                     operands.push(element: a - b)
-                case "*":
+                case "×":
                     let b = operands.pop()
                     let a = operands.pop()
                     operands.push(element: a * b)
-                case "/":
+                case "÷":
                     let b = operands.pop()
                     let a = operands.pop()
                     operands.push(element: a / b)
@@ -102,29 +106,36 @@ class Calculator {
         return operands.top()
     }
     
-    static private func postfixExpression(of infix: [String]) -> [String] {
+    static private func getPostfixExpression(for infix: [String]) -> [String] {
         var operators = Stack<String>()
         var postfix: [String] = []
         
         for i in infix {
-            if level(of: i) == 0 {
+            let outPrecedence = getOutPrecedence(for: i)
+            
+            if outPrecedence == -1 {
                 postfix.append(i)
                 continue
             }
-            if (i == ")") {
-                while operators.top() != "(" {
+            
+            if i == ")" {
+                while getInPrecedence(for: operators.top()) > outPrecedence {
                     postfix.append(operators.pop())
                 }
                 operators.pop()
-            }else if (i == "(") {
+                continue
+            }
+            
+            if operators.isEmpty() {
                 operators.push(element: i)
-            }else{
-                while !operators.isEmpty() && level(of: i) <= level(of: operators.top()) {
+            } else {
+                while !operators.isEmpty() && (getInPrecedence(for: operators.top()) > outPrecedence) {
                     postfix.append(operators.pop())
                 }
                 operators.push(element: i)
             }
         }
+        
         while !operators.isEmpty() {
             postfix.append(operators.pop())
         }
@@ -132,22 +143,41 @@ class Calculator {
         return postfix
     }
     
-    static private func level(of symbol: String) -> Int {
+    static func getInPrecedence(for symbol: String) -> Int {
         switch symbol {
         case "+":
             return 2
-        case "-":
+        case "−":
             return 2
-        case "*":
+        case "×":
+            return 4
+        case "÷":
+            return 4
+        case "(":
+            return 0
+        case ")":
+            return -1
+        default:
+            return -1
+        }
+    }
+    
+    static func getOutPrecedence(for symbol: String) -> Int {
+        switch symbol {
+        case "+":
+            return 1
+        case "−":
+            return 1
+        case "×":
             return 3
-        case "/":
+        case "÷":
             return 3
         case "(":
-            return 1
+            return 7
         case ")":
-            return 1
-        default:
             return 0
+        default:
+            return -1
         }
     }
     
@@ -157,13 +187,13 @@ class Calculator {
             return "+"
             
         case 12:
-            return "-"
+            return "−"
             
         case 13:
-            return "*"
+            return "×"
             
         case 14:
-            return "/"
+            return "÷"
             
         case 15:
             return "("
